@@ -13,7 +13,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+
   cupertino_icons: ^1.0.8
+  csv: ^8.0.0
+  path_provider: ^2.1.6
+  share_plus: ^13.3.1
+  pdf: ^3.13.1
 
 dev_dependencies:
   flutter_test:

@@ -21,4 +21,37 @@ class TransactionService {
 
     return transactions;
   }
+
+
+  List<Map<String, dynamic>> getTransactionsWithKeys() {
+    final List<Map<String, dynamic>> transactions = [];
+
+    for (final key in transactionsBox.keys) {
+      final item = transactionsBox.get(key);
+
+      if (item is Map) {
+        final Map<String, dynamic> data =
+        Map<String, dynamic>.from(item);
+
+        transactions.add({
+          'key': key,
+          'transaction': Transaction.fromMap(data),
+        });
+      }
+    }
+
+    return transactions;
+  }
+
+
+  Future<void> updateTransaction(
+      dynamic key,
+      Transaction transaction,
+      ) async {
+    await transactionsBox.put(key, transaction.toMap());
+  }
+
+  Future<void> deleteTransaction(dynamic key) async {
+    await transactionsBox.delete(key);
+  }
 }

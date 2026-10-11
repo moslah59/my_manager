@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'screens/login_screen.dart';
 import 'package:my_manager/screens/home_screen.dart';
-
-
-
+import 'package:my_manager/theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +18,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'My Manager',
       debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
       home: const HomeScreen(),
     );
   }
