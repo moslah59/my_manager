@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "285712412582",
+    "project_id": "my-manager-4332c",
+    "storage_bucket": "my-manager-4332c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285712412582:android:6a84842ee8ccebdadf6967",
+        "android_client_info": {
+          "package_name": "com.moslah.my_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285712412582-101gqvntt15etb0lm5oc12lmdkvifm6f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moslah.my_manager",
+            "certificate_hash": "5882d53961cbbf26a89c4278a97b5666d504526d"
+          }
+        },
+        {
+          "client_id": "285712412582-8kbhk77lgkagonc0qs2tvji3hb9rtse7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3ARhgumJwrZeuXlt2HaWlEgmtb93dCG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285712412582-8kbhk77lgkagonc0qs2tvji3hb9rtse7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

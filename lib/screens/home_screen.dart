@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_manager/models/transaction.dart';
 import 'package:my_manager/screens/add_transaction_screen.dart';
+import 'package:my_manager/screens/cloud_backup_screen.dart';
 import 'package:my_manager/services/export_report_service.dart';
 import 'package:my_manager/services/transaction_service.dart';
 import 'package:my_manager/theme/app_theme.dart';
@@ -40,14 +41,14 @@ class _HomeScreenState extends State<HomeScreen> {
   String formatAmount(double amount) {
     if (amount == amount.truncateToDouble()) {
       return amount.toInt().toString().replaceAllMapped(
-            RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
             (Match m) => '${m[1]},',
-          );
+      );
     }
     final parts = amount.toStringAsFixed(2).split('.');
     final integerPart = parts[0].replaceAllMapped(
       RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-      (Match m) => '${m[1]},',
+          (Match m) => '${m[1]},',
     );
     return '$integerPart.${parts[1]}';
   }
@@ -57,13 +58,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final entries = records
         .map((item) => {
-              'key': item['key'],
-              'transaction': item['transaction'] as Transaction,
-            })
+      'key': item['key'],
+      'transaction': item['transaction'] as Transaction,
+    })
         .toList();
 
     entries.sort(
-      (a, b) => (b['transaction'] as Transaction)
+          (a, b) => (b['transaction'] as Transaction)
           .date
           .compareTo((a['transaction'] as Transaction).date),
     );
@@ -462,58 +463,58 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: _isSearching
             ? TextField(
-                controller: _searchController,
-                autofocus: true,
-                decoration: const InputDecoration(
-                  hintText: 'সার্চ করুন (বিবরণ বা ক্যাটাগরি)...',
-                  border: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  fillColor: Colors.transparent,
-                  contentPadding: EdgeInsets.zero,
-                ),
-                onChanged: (val) {
-                  setState(() => _searchQuery = val.trim());
-                },
-              )
+          controller: _searchController,
+          autofocus: true,
+          decoration: const InputDecoration(
+            hintText: 'সার্চ করুন (বিবরণ বা ক্যাটাগরি)...',
+            border: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            fillColor: Colors.transparent,
+            contentPadding: EdgeInsets.zero,
+          ),
+          onChanged: (val) {
+            setState(() => _searchQuery = val.trim());
+          },
+        )
             : Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(7),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Icon(
-                      Icons.account_balance_wallet_rounded,
-                      color: Colors.white,
-                      size: 18,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'My Manager',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: -0.3,
-                        ),
-                      ),
-                      Text(
-                        'স্মার্ট ফাইন্যান্স ট্র্যাকার',
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.textSecondary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+          children: [
+            Container(
+              padding: const EdgeInsets.all(7),
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.circular(10),
               ),
+              child: const Icon(
+                Icons.account_balance_wallet_rounded,
+                color: Colors.white,
+                size: 18,
+              ),
+            ),
+            const SizedBox(width: 10),
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'My Manager',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -0.3,
+                  ),
+                ),
+                Text(
+                  'স্মার্ট ফাইন্যান্স ট্র্যাকার',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             tooltip: _isSearching ? 'Close Search' : 'Search',
@@ -538,26 +539,41 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: _exporting ? null : _showExportMenu,
             icon: _exporting
                 ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: AppColors.primary,
-                    ),
-                  )
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: AppColors.primary,
+              ),
+            )
                 : Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: AppColors.surfaceSubtle,
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: AppColors.border),
-                    ),
-                    child: const Icon(
-                      Icons.file_download_outlined,
-                      size: 20,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: AppColors.surfaceSubtle,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: AppColors.border),
+              ),
+              child: const Icon(
+                Icons.file_download_outlined,
+                size: 20,
+                color: AppColors.textPrimary,
+              ),
+            ),
+          ),
+          IconButton(
+            tooltip: 'Cloud Backup & Sync',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const CloudBackupScreen(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.cloud_sync_rounded,
+              color: AppColors.primary,
+            ),
           ),
           const SizedBox(width: 8),
         ],
@@ -834,7 +850,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 90),
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
-                  (context, index) {
+                      (context, index) {
                     final item = filtered[index];
                     final Transaction t = item['transaction'] as Transaction;
                     final int origIndex = item['originalIndex'] as int;
@@ -992,12 +1008,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           boxShadow: isSelected
               ? [
-                  BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.2),
-                    blurRadius: 6,
-                    offset: const Offset(0, 2),
-                  )
-                ]
+            BoxShadow(
+              color: AppColors.primary.withValues(alpha: 0.2),
+              blurRadius: 6,
+              offset: const Offset(0, 2),
+            )
+          ]
               : [],
         ),
         child: Text(
